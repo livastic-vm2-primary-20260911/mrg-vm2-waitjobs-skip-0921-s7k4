@@ -1,0 +1,38 @@
+scopes:
+  source:
+    manual:
+
+pull_request_rules:
+  - name: VM2 R55B safe docs observer
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55B_SAFE_20260928
+      - base = vm2-r55b-safe-base-20260928
+      - scope = docs
+      - -scope = critical
+    actions:
+      comment:
+        message: VM2_R55B_SAFE_DOCS_SEEN_20260928
+
+  - name: VM2 R55B truthful critical observer
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55B_GATE_20260928
+      - base = main
+      - scope = critical
+    actions:
+      comment:
+        message: VM2_R55B_TRUTHFUL_CRITICAL_SEEN_20260928
+
+  - name: VM2 R55B stale docs allow protected merge
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55B_GATE_20260928
+      - base = main
+      - scope = docs
+      - -scope = critical
+    actions:
+      comment:
+        message: VM2_R55B_STALE_SCOPE_ALLOW_20260928
+      merge:
+        method: merge
